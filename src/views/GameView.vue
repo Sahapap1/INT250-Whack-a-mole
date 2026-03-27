@@ -14,8 +14,8 @@ const isPaused = ref(false)
 
     <!-- Header Bar -->
     <div class="flex justify-center px-2 sm:px-4">
-<div class="bg-black/50 backdrop-blur-md border border-[#c874b2]/20 shadow-[0_8px_32px_0_rgba(0,0,0,0.8)] hover:border-[#c874b2]/40 transition-colors duration-500 pt-2 pb-2 sm:pt-2 sm:pb-3 px-4 sm:px-11 mt-2 sm:mt-3
-    max-w-5xl w-full rounded-3xl sm:rounded-4xl shadow-xl text-center text-shadow-2xs border-[#430d4d]/50 border-4 space-y-2 font-kanit">
+<div class="bg-black/50 backdrop-blur-md  border-[#c874b2]/20 shadow-[0_8px_32px_0_rgba(0,0,0,0.8)] hover:border-[#c874b2]/40 transition-colors duration-500 pt-2 pb-2 sm:pt-2 sm:pb-3 px-4 sm:px-11 mt-2 sm:mt-3
+    max-w-5xl w-full rounded-3xl sm:rounded-4xl text-center text-shadow-2xs border-4 space-y-2 font-kanit">
             <div class="flex items-center justify-between gap-2">
                 <div class="bg-purple-600/60 backdrop-blur-xl border border-[#c874b2]/20 space-y-1 inline-block px-3 sm:px-8 py-1 rounded-3xl">
                     <h1 class="text-2xl sm:text-4xl md:text-5xl text-white text-shadow-2xs ">
