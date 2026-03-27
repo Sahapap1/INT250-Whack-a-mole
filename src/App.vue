@@ -1,6 +1,6 @@
 <script setup>
 
-import Pregame from './components/Pregame.vue';
+
 </script>
 
 <template>
