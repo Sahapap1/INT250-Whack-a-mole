@@ -1,10 +1,10 @@
 <script setup>
+import Alien from '@/components/Alien.vue';
+import SoundButton from '@/components/SoundButton.vue';
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 
-const router = useRouter()
 
-const isMuted = ref(false)
 const isPaused = ref(false)
 
 const handleReset = () => {
@@ -16,9 +16,9 @@ const handleReset = () => {
 </script>
 
 <template>
-<div class="relative w-screen h-screen">
+  <div class="relative w-screen h-screen flex flex-col">
     <div class="absolute inset-0 -z-10">
-        <img src="../assets/bg/bg2.png" class="bg-cover bg-center w-full h-full" alt="">
+      <img src="../assets/bg/bg3.png" class="bg-cover bg-center w-full h-full" alt="">
     </div>
 
     <!-- Header Bar -->
@@ -41,45 +41,63 @@ const handleReset = () => {
                 </div>
             </div>
 
-            <div class="bg-amber-900/40 border-amber-500 border-2 text-white space-y-1 inline-block px-8 sm:px-25 py-1 rounded-4xl mx-auto text-shadow-2xs shadow-2xl">
-                <h1 class="text-xl sm:text-3xl text-white text-shadow-2xs ">
-                    Medium
-                </h1>
-            </div>
+        <div
+          class="bg-amber-900/40 border-amber-500 border-2 text-white space-y-1 inline-block px-8 sm:px-25 py-1 rounded-4xl mx-auto text-shadow-2xs shadow-2xl">
+          <h1 class="text-xl sm:text-3xl text-white text-shadow-2xs ">
+            Medium
+          </h1>
         </div>
+      </div>
+    </div>
+
+
+    <div class="mt-2 m-20 flex-1 relative">
+      <div class="absolute left-39 top-6">
+        <Alien />
+      </div>
+      <div class="absolute top-[0%] left-[39%]">
+        <Alien />
+      </div>
+      <div class="absolute right-[20%] top-[5%]">
+        <Alien />
+      </div>
+      <div class="absolute right-[4%] top-[20%]">
+        <Alien />
+      </div>
+      <div class="absolute left-[28%] top-[20%]">
+        <Alien />
+      </div>
+      <div class="absolute right-[31%] top-[27%]">
+        <Alien />
+      </div>
+      <div class="absolute right-[15%] -bottom-[3%]">
+        <Alien />
+      </div>
+      <div class="absolute right-[44%] -bottom-[7%]">
+        <Alien />
+      </div>
+      <div class="absolute left-[15%] bottom-[2%]">
+        <Alien />
+      </div>
+      
     </div>
 
     <!-- Pause Button — bottom LEFT -->
-    <button
-      @click="isPaused = !isPaused"
-      class="cursor-pointer absolute bottom-4 left-4 sm:bottom-10 sm:left-10 w-12 h-12 sm:w-16 sm:h-16 rounded-full bg-black/60 backdrop-blur-md border border-[#c874b2]/40 text-[#f5d5e0] flex items-center justify-center transition-all duration-300 hover:scale-110 hover:bg-black/90 hover:border-[#c874b2] shadow-[0_0_20px_rgba(0,0,0,0.8)] focus:outline-none z-20 group"
-    >
-      <div class="absolute inset-0 rounded-full bg-[#f5d5e0]/0 group-hover:bg-[#f5d5e0]/10 transition-colors duration-300"></div>
+    <button @click="isPaused = !isPaused"
+      class="cursor-pointer absolute bottom-4 left-4 sm:bottom-10 sm:left-10 w-12 h-12 sm:w-16 sm:h-16 rounded-full bg-black/60 backdrop-blur-md border border-[#c874b2]/40 text-[#f5d5e0] flex items-center justify-center transition-all duration-300 hover:scale-110 hover:bg-black/90 hover:border-[#c874b2] shadow-[0_0_20px_rgba(0,0,0,0.8)] focus:outline-none z-20 group">
+      <div
+        class="absolute inset-0 rounded-full bg-[#f5d5e0]/0 group-hover:bg-[#f5d5e0]/10 transition-colors duration-300">
+      </div>
 
-      <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 sm:w-7 sm:h-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+      <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 sm:w-7 sm:h-7" viewBox="0 0 24 24" fill="none"
+        stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
         <rect x="6" y="4" width="4" height="16"></rect>
         <rect x="14" y="4" width="4" height="16"></rect>
       </svg>
     </button>
 
     <!-- Volume Button — bottom RIGHT -->
-    <button 
-      @click="isMuted = !isMuted"
-      class="cursor-pointer absolute bottom-4 right-4 sm:bottom-10 sm:right-10 w-12 h-12 sm:w-16 sm:h-16 rounded-full bg-black/60 backdrop-blur-md border border-[#c874b2]/40 text-[#f5d5e0] flex items-center justify-center transition-all duration-300 hover:scale-110 hover:bg-black/90 hover:border-[#c874b2] shadow-[0_0_20px_rgba(0,0,0,0.8)] focus:outline-none z-20 group"
-    >
-      <div class="absolute inset-0 rounded-full bg-[#f5d5e0]/0 group-hover:bg-[#f5d5e0]/10 transition-colors duration-300"></div>
-      <svg v-if="!isMuted" xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 sm:w-7 sm:h-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
-        <path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path>
-        <path d="M19.07 4.93a10 10 0 0 1 0 14.14"></path>
-      </svg>
-      <svg v-else xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 sm:w-7 sm:h-7 opacity-70" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
-        <line x1="23" y1="1" x2="1" y2="23"></line>
-        <line x1="22.93" y1="9.07" x2="17.07" y2="14.93"></line>
-        <line x1="17.07" y1="9.07" x2="22.93" y2="14.93"></line>
-      </svg>
-    </button>
+    <SoundButton />
 
     <!-- Pause Overlay -->
     <div v-if="isPaused" class="fixed inset-0 z-50 flex items-center justify-center font-kanit">
@@ -125,10 +143,4 @@ const handleReset = () => {
 </div>
 </template>
 
-<style scoped>
-@import url('https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600;700;800;900&display=swap');
-
-.font-kanit {
-  font-family: 'Kanit', sans-serif;
-}
-</style>
+<style scoped></style>

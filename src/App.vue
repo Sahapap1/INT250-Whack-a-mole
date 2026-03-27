@@ -1,11 +1,9 @@
 <script setup>
 
-
 </script>
 
 <template>
   <router-view />
-  <Pregame />
 
 </template>
 

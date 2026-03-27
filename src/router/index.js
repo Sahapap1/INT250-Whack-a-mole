@@ -4,6 +4,7 @@ import HomeView from '../views/HomeView.vue'
 import GameView from '../views/GameView.vue'
 import ResultView from '../views/ResultView.vue'
 
+
 const routes = [
   {
     path: '/',
@@ -20,6 +21,7 @@ const routes = [
     name: 'result',
     component: ResultView
   }
+
 ]
 
 const router = createRouter({
