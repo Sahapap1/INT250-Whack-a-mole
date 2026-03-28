@@ -1,38 +1,100 @@
-# Whack-a-mole
+# 🎮 SHOOT-AN-ALIEN
 
-This template should help get you started developing with Vue 3 in Vite.
+เกมยิงเอเลี่ยนแบบ Reaction Game ที่พัฒนาโดยใช้ Vue 3  
+ผู้เล่นต้องกดยิงเอเลี่ยนตามตำแหน่งที่ปรากฏให้เร็วและแม่นยำที่สุดภายในเวลาที่กำหนด ⏱️
 
-## Recommended IDE Setup
+---
 
-[VS Code](https://code.visualstudio.com/) + [Vue (Official)](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
+## 🚀 Features
 
-## Recommended Browser Setup
+- 🎯 ยิงเอเลี่ยนด้วย Keyboard (QWE / ASD / ZXC หรือ Numpad)
+- ⚡ ระบบ Combo เพิ่มคะแนนเมื่อยิงต่อเนื่อง
+- 💥 เอฟเฟกต์ Flash และ Animation ยิง
+- 🔊 Sound Effects (ยิง, โดน, พลาด, ลบคะแนน)
+- 🎵 Background Music + ปุ่มเปิด/ปิดเสียง
+- ⏸️ ระบบ Pause / Resume
+- 🔁 Restart เกม
+- ⏱️ Countdown Timer 1 นาที
+- 🧠 Difficulty Levels (Easy / Medium / Hard)
 
-- Chromium-based browsers (Chrome, Edge, Brave, etc.):
-  - [Vue.js devtools](https://chromewebstore.google.com/detail/vuejs-devtools/nhdogjmejiglipccpnnnanhbledajbpd)
-  - [Turn on Custom Object Formatter in Chrome DevTools](http://bit.ly/object-formatters)
-- Firefox:
-  - [Vue.js devtools](https://addons.mozilla.org/en-US/firefox/addon/vue-js-devtools/)
-  - [Turn on Custom Object Formatter in Firefox DevTools](https://fxdx.dev/firefox-devtools-custom-object-formatters/)
+---
 
-## Customize configuration
+## 🎮 Gameplay
 
-See [Vite Configuration Reference](https://vite.dev/config/).
+- ยิงโดน → ได้คะแนน + Combo
+- ยิงพลาด → Combo รีเซ็ต
+- ยิงโดนตัวลบคะแนน → คะแนนลด
+- Combo สูง → คะแนนคูณมากขึ้น
 
-## Project Setup
+---
 
-```sh
+## 🛠️ Tech Stack
+
+- Vue 3 (Composition API)
+- Vite
+- TailwindCSS
+- JavaScript (ES6)
+
+---
+
+## 📂 Project Structure
+
+src/
+├── components/
+│ ├── Alien.vue
+│ ├── Blaster.vue
+│ ├── Flash.vue
+│ └── MuteButton.vue
+│
+├── composables/
+│ ├── useAlienSpawner.js
+│ ├── useKeyboardShoot.js
+│ ├── useShoot.js
+│ └── useAudio.js
+│
+├── views/
+│ ├── GameView.vue
+│ └── ResultView.vue
+│
+└── assets/
+├── sprite/
+└── sound/
+
+---
+
+## ▶️ How to Run
+
+```bash
 npm install
-```
-
-### Compile and Hot-Reload for Development
-
-```sh
 npm run dev
 ```
 
-### Compile and Minify for Production
+---
 
-```sh
-npm run build
-```
+| 👤 Member         | 💼 Responsibility                                |
+| ----------------- | ------------------------------------------------ |
+| 👨‍💻 Developer 1 | Game Logic (shoot, score, combo system)          |
+| 👩‍💻 Developer 2 | UI / UX Design (layout, animation, responsive)   |
+| 👨‍💻 Developer 3 | Sound System (BGM, SFX, mute system)             |
+| 👩‍💻 Developer 4 | Game Mechanics (spawn system, difficulty, timer) |
+
+---
+
+📌 Notes
+ - ใช้ Composition API เพื่อแยก logic เป็น modular (composables)
+ - รองรับการเล่นทั้ง keyboard และ numpad
+
+---
+
+📷 Preview
+<img width="1903" height="861" alt="image" src="https://github.com/user-attachments/assets/0c357887-3f8d-4214-b186-06a558f7e833" />
+<img width="1899" height="849" alt="image" src="https://github.com/user-attachments/assets/bd66ee9e-ab35-4d19-8d3e-1b656a7fd5a3" />
+
+
+
+
+---
+
+🧑‍🎓 Developed for
+
+INT250 CSS Framework SIT-KMUTT
