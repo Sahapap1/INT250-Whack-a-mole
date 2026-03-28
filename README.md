@@ -69,6 +69,9 @@ src/
 npm install
 npm run dev
 ```
+---
+## 👾 How to Play
+
 
 ---
 
