@@ -50,8 +50,13 @@ const selectedControl = ref('keyboard')
 
 
 const startGame = () => {
-  console.log('Starting game with:', selectedDiff.value, selectedControl.value)
-  router.push('/game')
+  router.push({
+    name: 'game',
+    query: {
+      diff: selectedDiff.value,
+      control: selectedControl.value
+    }
+  })
 }
 </script>
 

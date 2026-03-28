@@ -1,26 +1,25 @@
 <script setup>
-import { ref } from 'vue'
 
-const state = ref('idle')
+const props = defineProps({
+  state: String,
+  type: String,
+})
 
-function setState(s) {
-    state.value = s
+function getSprite(type) {
+  const map = {
+    alien: new URL('@/assets/sprite/alien.png', import.meta.url).href,
+    blue: new URL('@/assets/sprite/blue.png', import.meta.url).href,
+    green: new URL('@/assets/sprite/green.png', import.meta.url).href,
+    predator: new URL('@/assets/sprite/predator.png', import.meta.url).href,
+    red: new URL('@/assets/sprite/red.png', import.meta.url).href,
+  }
+
+  return map[type] || map.alien
 }
 
-function jump() {
-    state.value = 'jump'
-}
-
-function dead() {
-    state.value = 'dead'
-}
-
-function idle() {
-    state.value = 'idle'
-}
 </script>
 <template>
-    <div class="sprite" :class="state"></div>
+    <div class="sprite" :class="state" :style="{ backgroundImage: `url(${getSprite(type)})` }"></div>
 </template>
 
 
@@ -29,7 +28,6 @@ function idle() {
     width: 230px;
     height: 250px;
 
-    background-image: url('@/assets/sprite/alien.png');
     background-repeat: no-repeat;
 
     /* Base scale for large desktop screens. 
