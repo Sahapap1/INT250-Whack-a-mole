@@ -1,10 +1,12 @@
 <script setup>
-import { ref } from 'vue'
 
-const isMuted = ref(false)
+import { useAudio } from '@/composables/useAudio'
+
+
+const { isMuted, toggle } = useAudio()
 </script>
 <template>
-    <button @click="isMuted = !isMuted"
+    <button @click="toggle"
         class="cursor-pointer absolute bottom-6 right-6 sm:bottom-10 sm:right-10 w-12 h-12 sm:w-16 sm:h-16 rounded-full bg-black/60 backdrop-blur-md border border-[#c874b2]/40 text-[#f5d5e0] flex items-center justify-center transition-all duration-300 hover:scale-110 hover:bg-black/90 hover:border-[#c874b2] shadow-[0_0_20px_rgba(0,0,0,0.8)] focus:outline-none z-20 group">
         <div
             class="absolute inset-0 rounded-full bg-[#f5d5e0]/0 group-hover:bg-[#f5d5e0]/10 transition-colors duration-300">

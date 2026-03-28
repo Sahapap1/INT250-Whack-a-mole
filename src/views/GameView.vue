@@ -1,12 +1,15 @@
 <script setup>
 
-import SoundButton from '@/components/SoundButton.vue';
+import MuteButton from '@/components/MuteButton.vue';
 import Alien from '@/components/Alien.vue';
 import Blaster from '@/components/ฺBlaster.vue';
 import Flash from '@/components/Flash.vue';
+import pauseSound from '@/assets/sound/Pause.MP3'
 
+import { useUISound } from '@/composables/useUISound'
 import { useAlienSpawner } from '@/composables/useAlienSpawner'
 import { useKeyboardShoot } from '@/composables/useKeyboardShoot'
+import { useShoot } from '@/composables/useShoot'
 
 import { onMounted, ref, watch, computed } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
@@ -19,6 +22,8 @@ const isPaused = ref(false)
 
 const difficulty = ref(route.query.diff || 'easy')
 const control = ref(route.query.control || 'keyboard')
+
+const { playClick } = useUISound()
 
 const difficultyClass = computed(() => {
   if (difficulty.value === 'easy') {
@@ -47,10 +52,10 @@ const alienPositions = [
 ]
 
 const { aliens, start, stop } = useAlienSpawner(alienPositions, difficulty)
+
+
 const flashes = ref([])
 const shootTrigger = ref(0)
-
-const GUN_DURATION = 300 // ms (ต้องเท่ากับ animation ปืน)
 
 const score = ref(0)
 const combo = ref(1)
@@ -73,10 +78,17 @@ const formattedTime = computed(() => {
   return `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`
 })
 
-useKeyboardShoot(aliens, (alien, index) => {
-  shootTrigger.value++
-  shootAlien(alien, index)
-}, control)
+const { shootAlien } = useShoot({
+  flashes,
+  alienPositions,
+  score,
+  combo,
+  MAX_COMBO,
+  triggerScoreEffect,
+  shootTrigger
+})
+
+
 
 onMounted(() => {
   start()
@@ -107,84 +119,25 @@ const handleReset = () => {
   startTimer()
 }
 
+function playSound(src, volume = 0.5) {
+  const s = new Audio(src)
+  s.volume = volume
+  s.play()
+}
 
 watch(isPaused, (val) => {
   if (val) {
     stop()
     stopTimer()
+    playSound(pauseSound, 0.6)
   } else {
     start()
     startTimer()
+
+    playSound(pauseSound, 0.5)
   }
 })
 
-
-function shootAlien(alien, index) {
-
-  shootTrigger.value++
-
-  const pos = alienPositions[index]
-  const id = Date.now() + Math.random()
-
-  // 💥 flash
-  setTimeout(() => {
-    flashes.value.push({
-      id,
-      left: pos.left,
-      top: pos.top
-    })
-
-    setTimeout(() => {
-      flashes.value = flashes.value.filter(f => f.id !== id)
-    }, 300)
-
-  }, GUN_DURATION)
-
-  // 👽 hit logic
-  setTimeout(() => {
-
-    // ❌ ยิงพลาด → reset combo
-    if (!alien || !alien.visible || alien.state === 'dead') {
-      combo.value = 1
-      return
-    }
-
-    // 🎯 ยิงโดน
-    alien.state = 'dead'
-
-    // 🔥 เช็ค type
-    if (alien.type === 'predator') {
-      score.value -= 20
-      combo.value = 1
-
-      triggerScoreEffect('down') // 🔴
-
-    } else if (alien.type === 'alien') {
-      score.value += 30 * combo.value
-      combo.value = Math.min(combo.value + 1, MAX_COMBO)
-      triggerScoreEffect('up')
-    } else if (alien.type === 'blue') {
-      score.value += 15 * combo.value
-      combo.value = Math.min(combo.value + 1, MAX_COMBO)
-      triggerScoreEffect('up')
-    }
-    else if (alien.type === 'green') {
-      score.value += 10 * combo.value
-      combo.value = Math.min(combo.value + 1, MAX_COMBO)
-      triggerScoreEffect('up')
-    } else {
-      combo.value = Math.min(combo.value + 1, MAX_COMBO)
-      score.value += combo.value * 5
-
-      triggerScoreEffect('up') // 🟢
-    }
-
-    setTimeout(() => {
-      alien.visible = false
-    }, 300)
-
-  }, GUN_DURATION)
-}
 
 function triggerScoreEffect(type) {
   scoreEffect.value = type
@@ -216,6 +169,8 @@ function startTimer() {
     }
   }, 1000)
 }
+
+useKeyboardShoot(aliens, shootAlien, control)
 
 function stopTimer() {
   clearInterval(gameTimer)
@@ -295,7 +250,7 @@ function stopTimer() {
     </button>
 
     <!-- Volume Button — bottom RIGHT -->
-    <SoundButton />
+    <MuteButton />
 
     <!-- Pause Overlay -->
     <div v-if="isPaused" class="absolute inset-0 z-50 flex items-center justify-center">
@@ -318,11 +273,11 @@ function stopTimer() {
             CONTINUE
           </button>
           <div class="w-full flex gap-4">
-            <button @click="router.push('/')"
+            <button @click="playClick(); router.push('/')"
               class="flex-1 py-4 rounded-2xl font-bold text-lg sm:text-xl tracking-widest transition-all duration-300 border-2 outline-none cursor-pointer bg-gray-900/60 border-gray-600 text-gray-200 hover:text-white hover:border-gray-400 hover:bg-gray-800/80 hover:shadow-[0_0_15px_rgba(255,255,255,0.1)] active:scale-[0.98]">
               BACK
             </button>
-            <button @click="handleReset"
+            <button @click="handleReset()"
               class="flex-1 py-4 rounded-2xl font-bold text-lg sm:text-xl tracking-widest transition-all duration-300 border-2 outline-none cursor-pointer bg-gray-600/40 border-gray-400 text-white hover:border-white hover:bg-gray-500/60 hover:shadow-[0_0_15px_rgba(255,255,255,0.2)] active:scale-[0.98]">
               RESTART
             </button>

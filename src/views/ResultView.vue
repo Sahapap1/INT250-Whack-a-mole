@@ -2,6 +2,10 @@
 import { useRouter, useRoute } from "vue-router";
 import { ref } from 'vue'
 
+import { useUISound } from '@/composables/useUISound'
+
+const { playClick } = useUISound()
+
 const router = useRouter();
 const route = useRoute();
 
@@ -46,11 +50,11 @@ const playAgain = () => {
       </h2>
 
       <div class="text-4xl md:text-5xl font-black text-red-600 mb-10 tracking-widest drop-shadow-md">
-        {{ score }}
+        {{ score.toLocaleString() }}
       </div>
 
       <div class="flex flex-col sm:flex-row gap-5 w-full justify-center px-4">
-        <button @click="goBack" class="flex-1 sm:flex-[0.5] flex items-center justify-center gap-3
+        <button @click="goBack(); playClick()" class="flex-1 sm:flex-[0.5] flex items-center justify-center gap-3
          py-3 sm:py-4 px-6 rounded-2xl font-semibold text-lg sm:text-xl
          transition-all duration-300 border-2 cursor-pointer
          text-white
@@ -67,7 +71,7 @@ const playAgain = () => {
           Back
         </button>
 
-        <button @click="playAgain" class="flex-1 sm:flex-[0.5] flex items-center justify-center gap-3
+        <button @click="playAgain(); playClick()" class="flex-1 sm:flex-[0.5] flex items-center justify-center gap-3
          py-3 sm:py-4 px-6 rounded-2xl font-semibold text-lg sm:text-xl
          transition-all duration-300 border-2 cursor-pointer
          text-white

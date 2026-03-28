@@ -5,7 +5,6 @@ import { onMounted, onUnmounted } from 'vue'
 export function useKeyboardShoot(aliens, shootFn, control) {
 
 
-
   function getKeyMap() {
     if (control.value === 'numbers') {
       return {
@@ -41,6 +40,8 @@ export function useKeyboardShoot(aliens, shootFn, control) {
 
     const index = keyMap[code]
     const alien = aliens.value[index]
+
+    // 🔊 เล่นเสียงยิง
 
     shootFn(alien, index)
   }

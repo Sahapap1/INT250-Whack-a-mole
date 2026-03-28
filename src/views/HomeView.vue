@@ -1,8 +1,12 @@
 <script setup>
-import SoundButton from '@/components/SoundButton.vue'
+import MuteButton from '@/components/MuteButton.vue'
 import { ref } from 'vue'
 
 import { useRouter } from 'vue-router'
+
+import { useUISound } from '@/composables/useUISound'
+
+const { playClick } = useUISound()
 
 const router = useRouter()
 
@@ -98,7 +102,7 @@ const startGame = () => {
           <div class="flex flex-col sm:flex-row gap-3 sm:gap-4 w-full justify-center">
             <button 
               v-for="diff in difficulties" :key="diff.id"
-              @click="selectedDiff = diff.id"
+              @click="selectedDiff = diff.id; playClick()"
               :class="[
                 'flex-1 py-3 sm:py-4 px-6 rounded-2xl font-semibold text-lg sm:text-xl transition-all duration-300 border-2 outline-none cursor-pointer',
                 selectedDiff === diff.id ? diff.activeClass : diff.inactiveClass
@@ -115,7 +119,7 @@ const startGame = () => {
           <div class="flex flex-col sm:flex-row gap-3 sm:gap-4 w-full justify-center">
             <button 
               v-for="ctrl in controlOptions" :key="ctrl.id"
-              @click="selectedControl = ctrl.id"
+              @click="selectedControl = ctrl.id; playClick()"
               :class="[
                 'flex-1 sm:flex-[0.5] flex items-center justify-center gap-3 py-3 sm:py-4 px-6 rounded-2xl font-semibold text-lg sm:text-xl transition-all duration-300 border-2 outline-none cursor-pointer',
                 selectedControl === ctrl.id ? ctrl.activeClass : ctrl.inactiveClass
@@ -140,7 +144,7 @@ const startGame = () => {
       <!-- Bottom elements -->
       <div class="w-full flex flex-col items-center gap-6 mt-10">
         
-        <button @click="startGame" class="cursor-pointer relative overflow-hidden w-full py-5 rounded-2xl bg-linear-to-r from-[#430d4b] via-[#7b337d] to-[#430d4b] text-[#f5d5e0] font-black text-2xl tracking-[0.2em] outline-none transition-all duration-300 hover:shadow-[0_0_40px_rgba(200,116,178,0.6)] border border-[#c874b2]/50 hover:border-[#f5d5e0] active:scale-[0.98] group bg-size-[200%_auto] hover:bg-position-[right_center]">
+        <button @click="startGame(); playClick()" class="cursor-pointer relative overflow-hidden w-full py-5 rounded-2xl bg-linear-to-r from-[#430d4b] via-[#7b337d] to-[#430d4b] text-[#f5d5e0] font-black text-2xl tracking-[0.2em] outline-none transition-all duration-300 hover:shadow-[0_0_40px_rgba(200,116,178,0.6)] border border-[#c874b2]/50 hover:border-[#f5d5e0] active:scale-[0.98] group bg-size-[200%_auto] hover:bg-position-[right_center]">
           <div class="absolute inset-0 w-[50%] h-full bg-linear-to-r from-transparent via-[#f5d5e0]/30 to-transparent -skew-x-12 -translate-x-[250%] transition-transform duration-1000 ease-in-out group-hover:translate-x-[250%] pointer-events-none"></div>
            PLAY GAME
         </button>
@@ -149,7 +153,7 @@ const startGame = () => {
     </div>
 
     <!-- Mute Button -->
-    <SoundButton />
+    <MuteButton />
 
   </div>
 </template>
