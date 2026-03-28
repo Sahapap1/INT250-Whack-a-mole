@@ -79,7 +79,8 @@ npm run dev
 | 👤 Member         | 💼 Responsibility                                |
 | ----------------- | ------------------------------------------------ |
 | 👨‍💻 Wachitanan 034 |  UI / UX Design (layout, graphic ) and Document (how to play)        |
-| 👩‍💻 Sahaphap 046 |  Game Logic (shoot, score, combo system) and UI (animation) เขียน script logic การนับคะแนนยิงเอเลี่ยนบวกคะแนนตามสีหรือลบคะแนน นำภาพ sprite set มา run เป็น animation |
+| 👩‍💻 Sahaphap 046 |  Game Logic (Shoot, Score, Combo System) & UI Animation
+พัฒนาและออกแบบระบบการยิง (shooting mechanic) รวมถึงการคำนวณคะแนน (score system) และระบบคอมโบ (combo system) โดยกำหนดเงื่อนไขการเพิ่มหรือลดคะแนนตามประเภทและสีของเอเลี่ยนที่ถูกยิง นอกจากนี้ได้นำชุดภาพ sprite มาประยุกต์ใช้เพื่อสร้างแอนิเมชัน (animation) ให้กับตัวละครและเอฟเฟกต์ต่าง ๆ ภายในเกม เพื่อให้การแสดงผลมีความลื่นไหลและสมจริงยิ่งขึ้น |
 | 👨‍💻 Ittiched 057 | Game Mechanics (spawn system, difficulty, timer)            |
 | 👩‍💻 Panumed 107 | UI / UX Design (layout, responsive ) and Sound System (BGM, SFX, mute system)  |
 
