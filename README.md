@@ -72,6 +72,7 @@ npm run dev
 ---
 ## 👾 How to Play
 
+![Manual](src/assets/manual/manual.png)
 
 ---
 
